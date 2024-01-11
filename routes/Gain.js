@@ -1,7 +1,7 @@
 const express = require('express');
 const {
     getAll
-} = require('../controllers/OrderController');
+} = require('../controllers/GainController');
 const router = express.Router();
 
 //create a new vent

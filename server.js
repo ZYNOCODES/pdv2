@@ -9,7 +9,7 @@ const sequelize = require('./config/Database');
 const UserRoute = require('./routes/User');
 const VentRoute = require('./routes/Vent');
 const GiftRoute = require('./routes/Gift');
-const OrderRoute = require('./routes/Order');
+const gainRoute = require('./routes/Gain');
 
 const port = process.env.PORT || 8080;
 
@@ -28,7 +28,7 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 app.use('/user', UserRoute);
 app.use('/vent', VentRoute);
 app.use('/gift', GiftRoute);
-app.use('/order', OrderRoute);
+app.use('/gain', gainRoute);
 
 //connect to db
 sequelize
