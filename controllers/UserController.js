@@ -55,7 +55,7 @@ const SignIn = async (req, res) => {
 //signup
 const SignUp = async (req, res) => {
   const { Pdvname, Password, ResetPassword, Address, 
-    Contactname, Phone, Wilaya, Registre_commerce, Region} = req.body;
+    Contactname, Phone, Wilaya, Region} = req.body;
   try{
     // hash password
     const salt = await bcrypt.genSalt(10);
@@ -67,12 +67,14 @@ const SignUp = async (req, res) => {
           .status(400)
           .json({ message: "Tous les champs doivent être remplis" });
     }
-
-    if( !Registre_commerce ){
+    //check img
+    if(req.file === undefined){
       return res
-        .status(400)
-        .json({ message: "vous devez télécharger une photo de votre Registre de commerce " });
+      .status(400)
+      .json({ message: "vous devez télécharger une photo de votre Registre de commerce " });
     }
+    const image = req.file.filename;
+
     //check if password match
     if(Password != ResetPassword){
         return res.status(400).json({ message: "Les mots de passe ne correspondent pas" });
@@ -101,7 +103,7 @@ const SignUp = async (req, res) => {
       contactname: Contactname,
       phone: Phone,
       wilaya: Wilaya,
-      registre_commerce : Registre_commerce,
+      registre_commerce : image,
       region : Region,
       pdvstatus_id : 1
     });

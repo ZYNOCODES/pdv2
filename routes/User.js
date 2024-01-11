@@ -4,13 +4,16 @@ const {
     SignUp,
     GetUser
 } = require('../controllers/UserController');
+const {
+    upload
+} = require('../util/ImageUploader');
 const router = express.Router();
 
 //login
 router.post('/signin', SignIn);
 
 //signup
-router.post('/signup', SignUp);
+router.post('/signup',upload, SignUp);
 
 //get user by id
 router.get('/:id', GetUser);
