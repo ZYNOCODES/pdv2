@@ -44,7 +44,7 @@ const create  = async (req, res) => {
         });
 
         // return vent
-        res.status(200).json(vent);
+        res.status(200).json({message: "la vente a été validée avec succès."});
     }catch(error){
         console.error(error);
         res.status(500).send('Error creating vent');
