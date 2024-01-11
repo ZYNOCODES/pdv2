@@ -4,7 +4,10 @@ const {
     create
 } = require('../controllers/GainController');
 const router = express.Router();
+const requireAuth = require('../middleware/requireAuth');
 
+//secure all routes below
+router.use(requireAuth);
 //get all gains by pdvid
 router.get('/:id', getAll);
 

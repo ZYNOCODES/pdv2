@@ -29,17 +29,18 @@ const SignIn = async (req, res) => {
         if(!user){
             return res.status(400).json({ message: "user non trouvé" });
         }
-        if(user.pdvstatus_id == "1"){
-          return res.status(400).json({ message: "Désolé, votre compte n'est pas encore confirmé." });
-        }else if(user.pdvstatus_id == "3"){
-          return res.status(400).json({ message: "Votre compte a été rejeté" });
-        }
+        
         //check if password is correct
         const match = await bcrypt.compare(Password, user.password);
         if(!match){
             return res.status(400).json({ message: "Mot de passe incorrect" });
         }
-
+        //check user status
+        if(user.pdvstatus_id == "1"){
+          return res.status(400).json({ message: "Désolé, votre compte n'est pas encore confirmé." });
+        }else if(user.pdvstatus_id == "3"){
+          return res.status(400).json({ message: "Votre compte a été rejeté" });
+        }
         //create token
         const token = createToken(user.id);
         var id = user.id;
@@ -67,14 +68,7 @@ const SignUp = async (req, res) => {
           .status(400)
           .json({ message: "Tous les champs doivent être remplis" });
     }
-    //check img
-    if(req.file === undefined){
-      return res
-      .status(400)
-      .json({ message: "vous devez télécharger une photo de votre Registre de commerce " });
-    }
-    const image = req.file.filename;
-
+    
     //check if password match
     if(Password != ResetPassword){
         return res.status(400).json({ message: "Les mots de passe ne correspondent pas" });
@@ -94,6 +88,13 @@ const SignUp = async (req, res) => {
     if(userexist){
         return res.status(400).json({ message: "Nom déjà utilisé" });
     }
+    //check img
+    if(req.file === undefined){
+      return res
+      .status(400)
+      .json({ message: "vous devez télécharger une photo de votre Registre de commerce " });
+    }
+    const image = req.file.filename;
 
     //create new user
     const user = await User.create({
