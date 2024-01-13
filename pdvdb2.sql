@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 11, 2024 at 03:57 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Hôte : 127.0.0.1
+-- Généré le : dim. 14 jan. 2024 à 00:50
+-- Version du serveur : 10.4.25-MariaDB
+-- Version de PHP : 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pdvdb2`
+-- Base de données : `pdvdb2`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cadeaux`
+-- Structure de la table `cadeaux`
 --
 
 CREATE TABLE `cadeaux` (
@@ -32,10 +32,10 @@ CREATE TABLE `cadeaux` (
   `title` varchar(100) NOT NULL,
   `photo` varchar(255) DEFAULT NULL,
   `points` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `cadeaux`
+-- Déchargement des données de la table `cadeaux`
 --
 
 INSERT INTO `cadeaux` (`id`, `title`, `photo`, `points`) VALUES
@@ -47,7 +47,7 @@ INSERT INTO `cadeaux` (`id`, `title`, `photo`, `points`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `client`
+-- Structure de la table `client`
 --
 
 CREATE TABLE `client` (
@@ -56,10 +56,10 @@ CREATE TABLE `client` (
   `prenom` varchar(100) DEFAULT NULL,
   `phone` varchar(100) DEFAULT NULL,
   `address` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `client`
+-- Déchargement des données de la table `client`
 --
 
 INSERT INTO `client` (`id`, `nom`, `prenom`, `phone`, `address`) VALUES
@@ -159,12 +159,25 @@ INSERT INTO `client` (`id`, `nom`, `prenom`, `phone`, `address`) VALUES
 (104, 'zino', 'boumrar', NULL, NULL),
 (105, 'zino2', 'boumrar', NULL, NULL),
 (106, 'zino3', 'boumrar', NULL, NULL),
-(107, 'zino3', 'boumrar', NULL, NULL);
+(107, 'zino3', 'boumrar', NULL, NULL),
+(108, 'zino3', 'boumrar', NULL, NULL),
+(109, 'zineeddine', 'boumrar', NULL, NULL),
+(110, 'abdallah', 'dekkiche', NULL, NULL),
+(111, 'yacine', 'hakem', NULL, NULL),
+(112, 'ishak', 'ishak', NULL, NULL),
+(113, 'ishak', 'ishak', NULL, NULL),
+(114, 'ishak', 'ishak', NULL, NULL),
+(115, 'ishak', 'ishak', NULL, NULL),
+(116, 'ishak', 'ishak', NULL, NULL),
+(117, 'zizou', 'zizou', NULL, NULL),
+(118, 'imad', 'imad', NULL, NULL),
+(119, 'zino1', 'zino', NULL, NULL),
+(120, 'zino', 'boum', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `commande`
+-- Structure de la table `commande`
 --
 
 CREATE TABLE `commande` (
@@ -173,10 +186,10 @@ CREATE TABLE `commande` (
   `date` date DEFAULT NULL,
   `status_id` int(11) NOT NULL,
   `Pdv_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `commande`
+-- Déchargement des données de la table `commande`
 --
 
 INSERT INTO `commande` (`id`, `number`, `date`, `status_id`, `Pdv_id`) VALUES
@@ -188,16 +201,16 @@ INSERT INTO `commande` (`id`, `number`, `date`, `status_id`, `Pdv_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `commandestatus`
+-- Structure de la table `commandestatus`
 --
 
 CREATE TABLE `commandestatus` (
   `id` int(11) NOT NULL,
   `status` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `commandestatus`
+-- Déchargement des données de la table `commandestatus`
 --
 
 INSERT INTO `commandestatus` (`id`, `status`) VALUES
@@ -214,19 +227,19 @@ INSERT INTO `commandestatus` (`id`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `commande_has_product`
+-- Structure de la table `commande_has_product`
 --
 
 CREATE TABLE `commande_has_product` (
   `commande_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `qty` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gain`
+-- Structure de la table `gain`
 --
 
 CREATE TABLE `gain` (
@@ -239,19 +252,22 @@ CREATE TABLE `gain` (
   `date` date DEFAULT NULL,
   `validation_date` date DEFAULT NULL,
   `pdv_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `gain`
+-- Déchargement des données de la table `gain`
 --
 
 INSERT INTO `gain` (`id`, `title`, `points`, `previous_points`, `current_points`, `status`, `date`, `validation_date`, `pdv_id`) VALUES
-(1, 'Moto', 500, NULL, NULL, 'Commandé', '2024-01-09', NULL, 10);
+(1, 'Moto', 500, NULL, NULL, 'Commandé', '2024-01-09', NULL, 10),
+(2, 'Laptop', 100, NULL, NULL, 'Commandé', '2024-01-13', NULL, 29),
+(3, 'Television 32 pouce', 60, NULL, NULL, 'Commandé', '2024-01-13', NULL, 29),
+(4, 'Television 32 pouce', 60, NULL, NULL, 'Commandé', '2024-01-13', NULL, 29);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pdv`
+-- Structure de la table `pdv`
 --
 
 CREATE TABLE `pdv` (
@@ -273,10 +289,10 @@ CREATE TABLE `pdv` (
   `registre_commerce` varchar(500) NOT NULL,
   `region` varchar(50) NOT NULL DEFAULT '',
   `date_naissance` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `pdv`
+-- Déchargement des données de la table `pdv`
 --
 
 INSERT INTO `pdv` (`id`, `pdvname`, `address`, `contactname`, `phone`, `location`, `commune`, `Daira`, `wilaya`, `points`, `password`, `rc`, `pdvstatus_id`, `pdvgrade_id`, `user_id`, `registre_commerce`, `region`, `date_naissance`) VALUES
@@ -304,21 +320,22 @@ INSERT INTO `pdv` (`id`, `pdvname`, `address`, `contactname`, `phone`, `location
 (22, 'haddapdv7', 'exemple', 'exemple exemple', 'exemple', 'exemple', NULL, NULL, NULL, 0, '$2b$10$j2dlIU7nSo1Msjx41HTBcedwCP4/av7oL1.cFSkQlC1icLcFGkxeW', 'exemple', 2, 1, 1, '/uploads/1704026259356--streamtv.jpg', 'centre', NULL),
 (23, 'haddapdvpdv', 'exemple', 'exemple exemple', '0560586963', 'www.streamsystem.com', 'Zenata', 'Hennaya', 'Tlemcen', 0, '$2b$10$5A8iQyKQ.S91/oksFZUVReps3HSd/jcSS2XI0ruwdn.JmOcH.NguG', NULL, 1, 1, 1, '', 'ouest', NULL),
 (24, 'doudipdv', 'adr', 'pdv hjdsgdjgjsdgh', '0212387741', 'www.streamsystem.com', 'Taghit', 'Taghit', 'Béchar', 0, '$2b$10$gtMuANkJIWVcSBh8QRwr8u7cOI2B7u4bLE.vCqHWAw2t3TYKB6eni', NULL, 1, 1, 3, '', '', '1986-11-19'),
-(29, 'zino2', 'Address', 'Contactname', '0778909854', NULL, NULL, NULL, 'alger', 0, '$2b$10$Xw3BC64hYOH8kQE3rEvQdeJiD4bGAplhcZZxhqD1FrkDSUdUU9fWO', NULL, 1, 1, 1, '1232646541.jpeg', 'region', NULL);
+(29, 'zino2', 'Quartier msallah N25', 'Contactname', '0778909854', NULL, NULL, NULL, 'alger', 30, '$2b$10$Xw3BC64hYOH8kQE3rEvQdeJiD4bGAplhcZZxhqD1FrkDSUdUU9fWO', NULL, 2, 1, 1, '1232646541.jpeg', 'region', NULL),
+(30, 'zino6', 'Address', 'Contactname', '0778909854', NULL, NULL, NULL, 'alger', 0, '$2b$10$P2Bn1La5V1dICTum1pU3kuEV4e631MkkrAydbHUZGiNzANJiJEqBW', NULL, 2, 1, 1, '1705171276100.png', 'region', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pdvgrade`
+-- Structure de la table `pdvgrade`
 --
 
 CREATE TABLE `pdvgrade` (
   `id` int(11) NOT NULL,
   `grade` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `pdvgrade`
+-- Déchargement des données de la table `pdvgrade`
 --
 
 INSERT INTO `pdvgrade` (`id`, `grade`) VALUES
@@ -333,16 +350,16 @@ INSERT INTO `pdvgrade` (`id`, `grade`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pdvstatus`
+-- Structure de la table `pdvstatus`
 --
 
 CREATE TABLE `pdvstatus` (
   `id` int(11) NOT NULL,
   `status` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `pdvstatus`
+-- Déchargement des données de la table `pdvstatus`
 --
 
 INSERT INTO `pdvstatus` (`id`, `status`) VALUES
@@ -353,7 +370,7 @@ INSERT INTO `pdvstatus` (`id`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Structure de la table `product`
 --
 
 CREATE TABLE `product` (
@@ -386,10 +403,10 @@ CREATE TABLE `product` (
   `category_id` int(11) NOT NULL,
   `resolution` int(11) NOT NULL,
   `taille` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `product`
+-- Déchargement des données de la table `product`
 --
 
 INSERT INTO `product` (`id`, `model`, `size`, `os`, `price`, `points`, `is_new`, `is_available`, `is_bestselling`, `ram`, `rom`, `weight`, `hdmi`, `usb`, `vga`, `dimensions`, `wifi`, `bluetooth`, `earphone`, `ethernet`, `description`, `oldprice`, `rating`, `techsheet`, `productimg`, `banner`, `category_id`, `resolution`, `taille`) VALUES
@@ -398,7 +415,7 @@ INSERT INTO `product` (`id`, `model`, `size`, `os`, `price`, `points`, `is_new`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productcategory`
+-- Structure de la table `productcategory`
 --
 
 CREATE TABLE `productcategory` (
@@ -406,10 +423,10 @@ CREATE TABLE `productcategory` (
   `category` varchar(100) NOT NULL,
   `categoryimg` varchar(255) DEFAULT NULL,
   `abrv` varchar(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `productcategory`
+-- Déchargement des données de la table `productcategory`
 --
 
 INSERT INTO `productcategory` (`id`, `category`, `categoryimg`, `abrv`) VALUES
@@ -418,17 +435,17 @@ INSERT INTO `productcategory` (`id`, `category`, `categoryimg`, `abrv`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `resolutionproduct`
+-- Structure de la table `resolutionproduct`
 --
 
 CREATE TABLE `resolutionproduct` (
   `id` int(11) NOT NULL,
   `resultion` varchar(50) NOT NULL,
   `abrv` varchar(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `resolutionproduct`
+-- Déchargement des données de la table `resolutionproduct`
 --
 
 INSERT INTO `resolutionproduct` (`id`, `resultion`, `abrv`) VALUES
@@ -437,7 +454,7 @@ INSERT INTO `resolutionproduct` (`id`, `resultion`, `abrv`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `serial_number`
+-- Structure de la table `serial_number`
 --
 
 CREATE TABLE `serial_number` (
@@ -445,10 +462,10 @@ CREATE TABLE `serial_number` (
   `serial_number` varchar(200) NOT NULL,
   `product_id` int(11) NOT NULL,
   `status` varchar(50) NOT NULL DEFAULT 'disponible'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `serial_number`
+-- Déchargement des données de la table `serial_number`
 --
 
 INSERT INTO `serial_number` (`id`, `serial_number`, `product_id`, `status`) VALUES
@@ -457,16 +474,16 @@ INSERT INTO `serial_number` (`id`, `serial_number`, `product_id`, `status`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sizeproduct`
+-- Structure de la table `sizeproduct`
 --
 
 CREATE TABLE `sizeproduct` (
   `id` int(11) NOT NULL,
   `size` varchar(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `sizeproduct`
+-- Déchargement des données de la table `sizeproduct`
 --
 
 INSERT INTO `sizeproduct` (`id`, `size`) VALUES
@@ -475,7 +492,7 @@ INSERT INTO `sizeproduct` (`id`, `size`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Structure de la table `user`
 --
 
 CREATE TABLE `user` (
@@ -486,10 +503,10 @@ CREATE TABLE `user` (
   `email` varchar(100) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL,
   `usertype_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `user`
+-- Déchargement des données de la table `user`
 --
 
 INSERT INTO `user` (`id`, `nom`, `prenom`, `phone`, `email`, `password`, `usertype_id`) VALUES
@@ -500,16 +517,16 @@ INSERT INTO `user` (`id`, `nom`, `prenom`, `phone`, `email`, `password`, `userty
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usertype`
+-- Structure de la table `usertype`
 --
 
 CREATE TABLE `usertype` (
   `id` int(11) NOT NULL,
   `type` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `usertype`
+-- Déchargement des données de la table `usertype`
 --
 
 INSERT INTO `usertype` (`id`, `type`) VALUES
@@ -520,7 +537,7 @@ INSERT INTO `usertype` (`id`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `vent`
+-- Structure de la table `vent`
 --
 
 CREATE TABLE `vent` (
@@ -530,10 +547,10 @@ CREATE TABLE `vent` (
   `Product_id` int(11) NOT NULL,
   `Client_id` int(11) NOT NULL,
   `serial_number` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `vent`
+-- Déchargement des données de la table `vent`
 --
 
 INSERT INTO `vent` (`id`, `date`, `Pdv_id`, `Product_id`, `Client_id`, `serial_number`) VALUES
@@ -541,26 +558,39 @@ INSERT INTO `vent` (`id`, `date`, `Pdv_id`, `Product_id`, `Client_id`, `serial_n
 (96, '2024-01-11 00:00:00', 24, 1, 104, '1234567890'),
 (97, '2024-01-11 12:49:57', 24, 1, 105, '1234567890'),
 (98, '0000-00-00 00:00:00', 24, 1, 106, '1234567890'),
-(99, '2024-01-11 12:52:48', 24, 1, 107, '1234567890');
+(99, '2024-01-11 12:52:48', 24, 1, 107, '1234567890'),
+(100, '2024-01-13 18:57:26', 24, 1, 108, '1234567890'),
+(101, '2024-01-13 19:22:14', 24, 1, 109, '1234567890'),
+(102, '2024-01-13 20:26:33', 29, 1, 110, '1234567890'),
+(103, '2024-01-13 20:52:10', 29, 1, 111, '1234567890'),
+(104, '2024-01-13 22:50:17', 29, 1, 112, '1234567890'),
+(105, '2024-01-13 22:50:47', 29, 1, 113, '1234567890'),
+(106, '2024-01-13 22:50:51', 29, 1, 114, '1234567890'),
+(107, '2024-01-13 22:50:53', 29, 1, 115, '1234567890'),
+(108, '2024-01-13 22:50:55', 29, 1, 116, '1234567890'),
+(109, '2024-01-13 23:29:51', 30, 1, 117, '1234567890'),
+(110, '2024-01-13 23:30:48', 30, 1, 118, '1234567890'),
+(111, '2024-01-13 23:41:26', 29, 1, 119, '1234567890'),
+(112, '2024-01-13 23:42:07', 29, 1, 120, '1234567890');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `cadeaux`
+-- Index pour la table `cadeaux`
 --
 ALTER TABLE `cadeaux`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `client`
+-- Index pour la table `client`
 --
 ALTER TABLE `client`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `commande`
+-- Index pour la table `commande`
 --
 ALTER TABLE `commande`
   ADD PRIMARY KEY (`id`),
@@ -568,27 +598,27 @@ ALTER TABLE `commande`
   ADD KEY `Pdv_id` (`Pdv_id`);
 
 --
--- Indexes for table `commandestatus`
+-- Index pour la table `commandestatus`
 --
 ALTER TABLE `commandestatus`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `commande_has_product`
+-- Index pour la table `commande_has_product`
 --
 ALTER TABLE `commande_has_product`
   ADD PRIMARY KEY (`commande_id`,`product_id`),
   ADD KEY `product_id` (`product_id`);
 
 --
--- Indexes for table `gain`
+-- Index pour la table `gain`
 --
 ALTER TABLE `gain`
   ADD PRIMARY KEY (`id`),
   ADD KEY `pdv_id` (`pdv_id`);
 
 --
--- Indexes for table `pdv`
+-- Index pour la table `pdv`
 --
 ALTER TABLE `pdv`
   ADD PRIMARY KEY (`id`),
@@ -597,19 +627,19 @@ ALTER TABLE `pdv`
   ADD KEY `user_id` (`user_id`);
 
 --
--- Indexes for table `pdvgrade`
+-- Index pour la table `pdvgrade`
 --
 ALTER TABLE `pdvgrade`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `pdvstatus`
+-- Index pour la table `pdvstatus`
 --
 ALTER TABLE `pdvstatus`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `product`
+-- Index pour la table `product`
 --
 ALTER TABLE `product`
   ADD PRIMARY KEY (`id`),
@@ -618,48 +648,48 @@ ALTER TABLE `product`
   ADD KEY `fk_taille_product` (`taille`);
 
 --
--- Indexes for table `productcategory`
+-- Index pour la table `productcategory`
 --
 ALTER TABLE `productcategory`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `abrv` (`abrv`);
 
 --
--- Indexes for table `resolutionproduct`
+-- Index pour la table `resolutionproduct`
 --
 ALTER TABLE `resolutionproduct`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `abrv` (`abrv`);
 
 --
--- Indexes for table `serial_number`
+-- Index pour la table `serial_number`
 --
 ALTER TABLE `serial_number`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_product_serial_number` (`product_id`);
 
 --
--- Indexes for table `sizeproduct`
+-- Index pour la table `sizeproduct`
 --
 ALTER TABLE `sizeproduct`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `size` (`size`);
 
 --
--- Indexes for table `user`
+-- Index pour la table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD KEY `usertype_id` (`usertype_id`);
 
 --
--- Indexes for table `usertype`
+-- Index pour la table `usertype`
 --
 ALTER TABLE `usertype`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `vent`
+-- Index pour la table `vent`
 --
 ALTER TABLE `vent`
   ADD PRIMARY KEY (`id`),
@@ -668,131 +698,131 @@ ALTER TABLE `vent`
   ADD KEY `Client_id` (`Client_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `cadeaux`
+-- AUTO_INCREMENT pour la table `cadeaux`
 --
 ALTER TABLE `cadeaux`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `client`
+-- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
--- AUTO_INCREMENT for table `commande`
+-- AUTO_INCREMENT pour la table `commande`
 --
 ALTER TABLE `commande`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
--- AUTO_INCREMENT for table `commandestatus`
+-- AUTO_INCREMENT pour la table `commandestatus`
 --
 ALTER TABLE `commandestatus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT for table `gain`
+-- AUTO_INCREMENT pour la table `gain`
 --
 ALTER TABLE `gain`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `pdv`
+-- AUTO_INCREMENT pour la table `pdv`
 --
 ALTER TABLE `pdv`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
--- AUTO_INCREMENT for table `pdvgrade`
+-- AUTO_INCREMENT pour la table `pdvgrade`
 --
 ALTER TABLE `pdvgrade`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `pdvstatus`
+-- AUTO_INCREMENT pour la table `pdvstatus`
 --
 ALTER TABLE `pdvstatus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `product`
+-- AUTO_INCREMENT pour la table `product`
 --
 ALTER TABLE `product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
--- AUTO_INCREMENT for table `productcategory`
+-- AUTO_INCREMENT pour la table `productcategory`
 --
 ALTER TABLE `productcategory`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `resolutionproduct`
+-- AUTO_INCREMENT pour la table `resolutionproduct`
 --
 ALTER TABLE `resolutionproduct`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `serial_number`
+-- AUTO_INCREMENT pour la table `serial_number`
 --
 ALTER TABLE `serial_number`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `sizeproduct`
+-- AUTO_INCREMENT pour la table `sizeproduct`
 --
 ALTER TABLE `sizeproduct`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `usertype`
+-- AUTO_INCREMENT pour la table `usertype`
 --
 ALTER TABLE `usertype`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `vent`
+-- AUTO_INCREMENT pour la table `vent`
 --
 ALTER TABLE `vent`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `commande`
+-- Contraintes pour la table `commande`
 --
 ALTER TABLE `commande`
   ADD CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`status_id`) REFERENCES `commandestatus` (`id`),
   ADD CONSTRAINT `commande_ibfk_2` FOREIGN KEY (`Pdv_id`) REFERENCES `pdv` (`id`);
 
 --
--- Constraints for table `commande_has_product`
+-- Contraintes pour la table `commande_has_product`
 --
 ALTER TABLE `commande_has_product`
   ADD CONSTRAINT `commande_has_product_ibfk_1` FOREIGN KEY (`commande_id`) REFERENCES `commande` (`id`),
   ADD CONSTRAINT `commande_has_product_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`);
 
 --
--- Constraints for table `gain`
+-- Contraintes pour la table `gain`
 --
 ALTER TABLE `gain`
   ADD CONSTRAINT `gain_ibfk_2` FOREIGN KEY (`pdv_id`) REFERENCES `pdv` (`id`);
 
 --
--- Constraints for table `pdv`
+-- Contraintes pour la table `pdv`
 --
 ALTER TABLE `pdv`
   ADD CONSTRAINT `pdv_ibfk_1` FOREIGN KEY (`pdvstatus_id`) REFERENCES `pdvstatus` (`id`),
@@ -800,7 +830,7 @@ ALTER TABLE `pdv`
   ADD CONSTRAINT `pdv_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
--- Constraints for table `product`
+-- Contraintes pour la table `product`
 --
 ALTER TABLE `product`
   ADD CONSTRAINT `fk_resolution_product` FOREIGN KEY (`resolution`) REFERENCES `resolutionproduct` (`id`) ON DELETE CASCADE,
@@ -808,19 +838,19 @@ ALTER TABLE `product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `productcategory` (`id`);
 
 --
--- Constraints for table `serial_number`
+-- Contraintes pour la table `serial_number`
 --
 ALTER TABLE `serial_number`
   ADD CONSTRAINT `fk_product_serial_number` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `user`
+-- Contraintes pour la table `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`usertype_id`) REFERENCES `usertype` (`id`);
 
 --
--- Constraints for table `vent`
+-- Contraintes pour la table `vent`
 --
 ALTER TABLE `vent`
   ADD CONSTRAINT `vent_ibfk_1` FOREIGN KEY (`Pdv_id`) REFERENCES `pdv` (`id`),
