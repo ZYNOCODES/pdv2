@@ -55,30 +55,26 @@ const SignIn = async (req, res) => {
 
 //signup
 const SignUp = async (req, res) => {
-  const { Pdvname, Password, ResetPassword, Address, 
-    Contactname, Phone, Wilaya, Region} = req.body;
+  const { Pdvname, Password, Address, RC,
+    Contactname, Phone, Wilaya, Region, Location, DateNaissance} = req.body;
   try{
     // hash password
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(Password, salt);
 
     //validation
-    if( !Pdvname || !Password || !ResetPassword || !Address || !Contactname || !Phone || !Wilaya ){
+    if( !Pdvname || !Password || !Address || !Contactname || !Phone || !Wilaya || !Region || !Location || !DateNaissance || !RC ){
         return res
           .status(400)
           .json({ message: "Tous les champs doivent être remplis" });
     }
     
-    //check if password match
-    if(Password != ResetPassword){
-        return res.status(400).json({ message: "Les mots de passe ne correspondent pas" });
-    }
     //check if password is strong
-    if(!Validator.isStrongPassword(Password)){
-        return res
-          .status(400)
-          .json({ message: "Mot de passe pas assez fort" });
-    }
+    // if(!Validator.isStrongPassword(Password)){
+    //     return res
+    //       .status(400)
+    //       .json({ message: "Mot de passe pas assez fort" });
+    // }
     //check if user exist already
     const userexist = await User.findOne({
         where: {
@@ -86,7 +82,7 @@ const SignUp = async (req, res) => {
         }
     });
     if(userexist){
-        return res.status(400).json({ message: "Nom déjà utilisé" });
+        return res.status(400).json({ message: "Nom  d'utilisateur déjà utilisé" });
     }
     //check img
     if(req.file === undefined){
@@ -106,6 +102,9 @@ const SignUp = async (req, res) => {
       wilaya: Wilaya,
       registre_commerce : image,
       region : Region,
+      location : Location,
+      date_naissance : DateNaissance,
+      rc : RC,
       pdvstatus_id : 1
     });
 
