@@ -1,5 +1,6 @@
 const multer = require('multer');
 const path = require('path');
+const mime = require('mime-types');
 
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
@@ -15,14 +16,15 @@ const upload = multer({
   limits: { fileSize: 10 * 1024 * 1024 }, // Check the file size limit
   fileFilter: (req, file, cb) => {
     // Check the file types
-    const fileTypes = /jpeg|jpg|png|gif/;
-    const mimeType = fileTypes.test(file.mimetype);
-    const extname = fileTypes.test(path.extname(file.originalname));
+    const allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+    const detectedMimeType = mime.lookup(file.originalname);
 
-    if (mimeType && extname) {
+    if (allowedFileTypes.includes(detectedMimeType)) {
       return cb(null, true);
     }
-    cb('Give proper files format to upload');
+    const error = new Error('Invalid file format. Allowed formats: JPEG, JPG, PNG, GIF');
+    error.status = 400; // Bad Request
+    cb(error);
   }
 }).single('image');
 

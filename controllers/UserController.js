@@ -27,7 +27,7 @@ const SignIn = async (req, res) => {
             }
         });
         if(!user){
-            return res.status(400).json({ message: "user non trouvé" });
+            return res.status(400).json({ message: "Nom  d'utilisateur non trouvé" });
         }
         
         //check if password is correct
@@ -55,34 +55,30 @@ const SignIn = async (req, res) => {
 
 //signup
 const SignUp = async (req, res) => {
-  const { Pdvname, Password, Address, RC,
-    Contactname, Phone, Wilaya, Region, Location, DateNaissance} = req.body;
+  const { Pdvname, Password, Address, RC,Contactname, 
+    Phone, Wilaya, Region, Location, DateNaissance} = req.body;
   try{
     // hash password
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(Password, salt);
 
-    //validation
-    if( !Pdvname || !Password || !Address || !Contactname || !Phone || !Wilaya || !Region || !Location || !DateNaissance || !RC ){
-        return res
-          .status(400)
-          .json({ message: "Tous les champs doivent être remplis" });
-    }
-    
-    //check if password is strong
-    // if(!Validator.isStrongPassword(Password)){
-    //     return res
-    //       .status(400)
-    //       .json({ message: "Mot de passe pas assez fort" });
-    // }
     //check if user exist already
     const userexist = await User.findOne({
         where: {
           pdvname: Pdvname
         }
     });
+    const RCexist = await User.findOne({
+      where: {
+        rc: RC
+      }
+    });
+    
     if(userexist){
         return res.status(400).json({ message: "Nom  d'utilisateur déjà utilisé" });
+    }
+    if(RCexist){
+      return res.status(400).json({ message: "l'utilisateur existe déjà avec ce numéro de registre du commerce" });
     }
     //check img
     if(req.file === undefined){
