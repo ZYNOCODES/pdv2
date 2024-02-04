@@ -1,7 +1,8 @@
 const User = require('../models/UserModel');
-const bcrypt = require('bcrypt');
 const CustomError = require('../util/CustomError');
 const asyncErrorHandler = require('../util/asyncErrorHandler');
+const UserService = require('../services/UserService.js');
+const bcrypt = require('../util/bcrypt.js');
 const {
   createToken
 } = require('../util/JWT');
@@ -17,22 +18,19 @@ const SignIn = asyncErrorHandler(async (req, res, next) => {
   }
 
   //check if user exist
-  const user = await User.findOne({
-      where: {
-        pdvname: Pdvname
-      }
-  });
+  const user = await UserService.findUserByName(Pdvname);
   if(!user){
-      const err = new CustomError('Nom  d\'utilisateur non trouvé', 400);
-      return next(err);
+    const err = new CustomError('Nom  d\'utilisateur non trouvé', 400);
+    return next(err);
   }
-  
+
   //check if password is correct
-  const match = await bcrypt.compare(Password, user.password);
+  const match = await bcrypt.comparePassword(Password, user.password);
   if(!match){
       const err = new CustomError('Mot de passe incorrect', 400);
       return next(err);
   }
+
   //check user status
   if (user.pdvstatus_id == "1") {
     const err = new CustomError('Désolé, votre compte n\'est pas encore confirmé.', 400);
@@ -55,29 +53,21 @@ const SignUp = asyncErrorHandler(async (req, res, next) => {
     Phone, Wilaya, Region, Location, DateNaissance} = req.body;
   
   // hash password
-  const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hash(Password, salt);
+  const hash = await bcrypt.hashPassword(Password);
 
   //check if user exist already
-  const userexist = await User.findOne({
-      where: {
-        pdvname: Pdvname
-      }
-  });
-  const RCexist = await User.findOne({
-    where: {
-      rc: RC
-    }
-  });
-  
+  const userexist = await UserService.findUserByName(Pdvname);
   if(userexist){
-      const err = new CustomError('Nom  d\'utilisateur déjà utilisé', 400);
-      return next(err);
+    const err = new CustomError('Nom  d\'utilisateur déjà utilisé', 400);
+    return next(err);
   }
+  //check if RC exist already
+  const RCexist = await UserService.findUserByRC(RC);
   if(RCexist){
     const err = new CustomError('l\'utilisateur existe déjà avec ce numéro de registre du commerce', 400);
     return next(err);
   }
+  
   //check img
   if(req.file === undefined){
     const err = new CustomError('vous devez télécharger une photo de votre Registre de commerce', 400);

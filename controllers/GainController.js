@@ -1,9 +1,9 @@
 const Gain = require('../models/GainModel');
-const User = require('../models/UserModel');
 const CustomError = require('../util/CustomError');
 const asyncErrorHandler = require('../util/asyncErrorHandler');
+const UserService = require('../services/UserService.js');
 
-const getAll  = asyncErrorHandler(async (req, res) => {
+const getAll  = asyncErrorHandler(async (req, res, next) => {
     const { id } = req.params;
     //get all gains
     const gains = await Gain.findAll({
@@ -20,14 +20,10 @@ const getAll  = asyncErrorHandler(async (req, res) => {
     res.status(200).json(gains);
 })
 
-const create = asyncErrorHandler(async (req, res) =>{
+const create = asyncErrorHandler(async (req, res, next) =>{
     const { PDVID, Title, Points } = req.body;
     //get user by id
-    const user = await User.findOne({
-        where:{
-            id : PDVID
-        }
-    });
+    const user = await UserService.findUseById(PDVID);
     //check if user exist
     if (!user) {
         const err = new CustomError('Utilisateur non trouvé', 400);
@@ -52,8 +48,7 @@ const create = asyncErrorHandler(async (req, res) =>{
         return next(err);
     }
     //update user points
-    if(user.points > 0) user.points = user.points - Points;
-    await user.save();
+    UserService.UpdateUserPoints(user, Points);
 
     //return gain
     res.status(200).json({message: "la demande a été transmise avec succès, veuillez attendre la confirmation"});
