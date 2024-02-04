@@ -2,10 +2,8 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
-const multer = require('multer');
-const bodyparser = require('body-parser');
 const sequelize = require('./config/Database');
+const ErrorHandler = require('./controllers/ErrorController');
 const UserRoute = require('./routes/User');
 const VentRoute = require('./routes/Vent');
 const GiftRoute = require('./routes/Gift');
@@ -24,12 +22,15 @@ app.use(express.urlencoded({ limit: '10mb', extended: false }));
 
 
 
-
 //routes
 app.use('/user', UserRoute);
 app.use('/vent', VentRoute);
 app.use('/gift', GiftRoute);
 app.use('/gain', gainRoute);
+
+//error handling
+app.use(ErrorHandler);
+
 
 //connect to db
 sequelize
