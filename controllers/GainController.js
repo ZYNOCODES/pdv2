@@ -48,7 +48,7 @@ const create = asyncErrorHandler(async (req, res, next) =>{
         return next(err);
     }
     //update user points
-    UserService.UpdateUserPoints(user, Points);
+    await UserService.DecrementUserPoints(user, Points);
 
     //return gain
     res.status(200).json({message: "la demande a été transmise avec succès, veuillez attendre la confirmation"});

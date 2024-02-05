@@ -2,7 +2,7 @@ const Gift = require('../models/GiftModel');
 const CustomError = require('../util/CustomError');
 const asyncErrorHandler = require('../util/asyncErrorHandler');
 
-const getAll  = asyncErrorHandler(async (req, res) => {
+const getAll  = asyncErrorHandler(async (req, res, next) => {
     //get all gifts
     const gifts = await Gift.findAll();
     // check if gifts founded

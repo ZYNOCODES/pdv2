@@ -25,8 +25,12 @@ const findUserByRC = async (RC) => {
     return user;
 };
 
-const UpdateUserPoints = async (user, Points) => {
+const DecrementUserPoints = async (user, Points) => {
     if(user.points > 0) user.points = user.points - Points;
+    await user.save();
+};
+const IncrementUserPoints = async (user, Points) => {
+    user.points = user.points + Points;
     await user.save();
 };
 
@@ -34,5 +38,6 @@ module.exports = {
     findUseById,
     findUserByName,
     findUserByRC,
-    UpdateUserPoints
+    IncrementUserPoints,
+    DecrementUserPoints
 }

@@ -8,6 +8,7 @@ const UserRoute = require('./routes/User');
 const VentRoute = require('./routes/Vent');
 const GiftRoute = require('./routes/Gift');
 const gainRoute = require('./routes/Gain');
+const productRoute = require('./routes/Product');
 
 const port = process.env.PORT || 8080;
 
@@ -27,6 +28,7 @@ app.use('/user', UserRoute);
 app.use('/vent', VentRoute);
 app.use('/gift', GiftRoute);
 app.use('/gain', gainRoute);
+app.use('/product', productRoute);
 
 //error handling
 app.use(ErrorHandler);
