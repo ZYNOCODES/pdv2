@@ -11,7 +11,7 @@ const create  = asyncErrorHandler(async (req, res, next) => {
     const {PDVID, Nom, Prenom, SerialNumber, Phone, Adress} = req.body;
     
     //validation
-    if( !Nom || !Prenom || !Phone || !Adress || !SerialNumber || !PDVID ){
+    if( !Nom || !Prenom || !Phone || !SerialNumber || !PDVID ){
         const err = new CustomError('Tous les champs doivent être remplis', 400);
         return next(err);
     }
@@ -64,7 +64,7 @@ const create  = asyncErrorHandler(async (req, res, next) => {
     await UserService.IncrementUserPoints(user, product.points);
 
     // return vent
-    res.status(200).json({message: `Félicitations, vous avez gagné un nombre impressionnant de ${product.points} points, bravo.`});
+    res.status(200).json({message: `Félicitations, vous avez gagné ${product.points} points pour cette vente, bravo.`});
 });
 const getAllByPDV = asyncErrorHandler(async (req, res, next) => {
     const { PDVID } = req.params;
