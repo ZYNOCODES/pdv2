@@ -8,7 +8,12 @@ const findSerialNumber = async (SerialNumber) => {
     });
     return product;
 };
+const updateSerialNumberStatus = async (serialnumber, status) => {
+    serialnumber.status = status;
+    await serialnumber.save();
+};
 
 module.exports = {
-    findSerialNumber
+    findSerialNumber,
+    updateSerialNumberStatus
 }

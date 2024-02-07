@@ -27,7 +27,11 @@ const create  = asyncErrorHandler(async (req, res, next) => {
     // check if serialnumber exist
     const serialnumber = await SerialNumberService.findSerialNumber(SerialNumber);
     if(!serialnumber){
-        const err = new CustomError('Serial number non trouvé', 400);
+        const err = new CustomError('Numéro de série non trouvé', 400);
+        return next(err);
+    }
+    if(serialnumber.status != 'disponible'){
+        const err = new CustomError('Le numéro de série est déjà utilisé d\'une vente précédente', 400);
         return next(err);
     }
 
@@ -62,10 +66,13 @@ const create  = asyncErrorHandler(async (req, res, next) => {
     }
     //update user points
     await UserService.IncrementUserPoints(user, product.points);
+    //update serialnumber status
+    await SerialNumberService.updateSerialNumberStatus(serialnumber, 'vendu');
 
     // return vent
     res.status(200).json({message: `Félicitations, vous avez gagné ${product.points} points pour cette vente, bravo.`});
 });
+
 const getAllByPDV = asyncErrorHandler(async (req, res, next) => {
     const { PDVID } = req.params;
 

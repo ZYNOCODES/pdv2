@@ -2,6 +2,7 @@ const User = require('../models/UserModel');
 const CustomError = require('../util/CustomError');
 const asyncErrorHandler = require('../util/asyncErrorHandler');
 const UserService = require('../services/UserService.js');
+const VenteService = require('../services/VenteService.js');
 const bcrypt = require('../util/bcrypt.js');
 const {
   createToken
@@ -50,7 +51,7 @@ const SignIn = asyncErrorHandler(async (req, res, next) => {
 //signup
 const SignUp = asyncErrorHandler(async (req, res, next) => {
   const { Pdvname, Password, Address, RC,Contactname, 
-    Phone, Wilaya, Region, Location, DateNaissance} = req.body;
+    Phone, Wilaya, Commune, Location, DateNaissance} = req.body;
   
   // hash password
   const hash = await bcrypt.hashPassword(Password);
@@ -84,7 +85,8 @@ const SignUp = asyncErrorHandler(async (req, res, next) => {
     phone: Phone,
     wilaya: Wilaya,
     registre_commerce : image,
-    region : Region,
+    commune : Commune,
+    region : 'Centre',
     location : Location,
     date_naissance : DateNaissance,
     rc : RC,
@@ -110,6 +112,11 @@ const GetUser = asyncErrorHandler(async (req, res, next) => {
       const err = new CustomError('Utilisateur non trouvé', 400);
       return next(err);
   }
+  //count user ventes
+  const ventes = await VenteService.CountVentesByPDV(id);
+  //add ventes to user
+  user.dataValues.ventes = ventes;
+
   // return user
   res.status(200).json(user);
 })
