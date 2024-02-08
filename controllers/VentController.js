@@ -70,7 +70,7 @@ const create  = asyncErrorHandler(async (req, res, next) => {
     await SerialNumberService.updateSerialNumberStatus(serialnumber, 'vendu');
 
     // return vent
-    res.status(200).json({message: `Félicitations, vous avez gagné ${product.points} points pour cette vente, bravo.`});
+    res.status(200).json({message: `Félicitations, vous avez gagné ${product.points} Gains pour cette vente, bravo.`});
 });
 
 const getAllByPDV = asyncErrorHandler(async (req, res, next) => {

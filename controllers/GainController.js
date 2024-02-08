@@ -31,7 +31,7 @@ const create = asyncErrorHandler(async (req, res, next) =>{
     }
     //check if user have enough points
     if(user.points < Points){
-        const err = new CustomError('tu n\'as pas assez de points pour profiter de ce cadeau', 400);
+        const err = new CustomError('tu n\'as pas assez de gains pour profiter de ce cadeau', 400);
         return next(err);
     }
     //create new gain
