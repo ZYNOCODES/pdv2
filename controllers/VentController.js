@@ -8,10 +8,10 @@ const UserService = require('../services/UserService.js');
 const ProductService = require('../services/ProductService.js');
 
 const create  = asyncErrorHandler(async (req, res, next) => {
-    const {PDVID, Nom, Prenom, SerialNumber, Phone, Adress} = req.body;
+    const {PDVID, Nom, Prenom, SerialNumber, Phone, Adress, Model} = req.body;
     
     //validation
-    if( !Nom || !Prenom || !Phone || !SerialNumber || !PDVID ){
+    if( !Nom || !Prenom || !Phone || !SerialNumber || !Model ){
         const err = new CustomError('Tous les champs doivent être remplis', 400);
         return next(err);
     }
@@ -36,10 +36,15 @@ const create  = asyncErrorHandler(async (req, res, next) => {
     }
 
     //get product by id
-    const product = await ProductService.findProductById(serialnumber.product_id);
+    const product = await ProductService.findProductById(Model);
     //check if product exist
     if (!product) {
-        const err = new CustomError('Produit non trouvé', 400);
+        const err = new CustomError('Modèle non trouvé', 400);
+        return next(err);
+    }
+    //check if product assosiated with serial number
+    if (product.id !== serialnumber.product_id) {
+        const err = new CustomError('Le modèle n\'est pas associé au numéro de série que vous avez scanné', 400);
         return next(err);
     }
 

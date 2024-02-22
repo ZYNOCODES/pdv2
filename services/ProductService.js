@@ -5,6 +5,16 @@ const findProductById = async (id ) => {
     return product;
 };
 
+const findProductByName = async (Name) => {
+    const product = await Product.findOne({
+        where:{
+            model: Name
+        }
+    });
+    return product;
+};
+
 module.exports = {
     findProductById,
+    findProductByName
 }
